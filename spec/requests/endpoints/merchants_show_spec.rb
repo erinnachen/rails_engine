@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "GET /api/v1/merchant/:id" do
+RSpec.describe "GET /api/v1/merchants/:id" do
   include SpecHelpers
   it "returns a single merchant" do
     merchant1 = create(:merchant)
