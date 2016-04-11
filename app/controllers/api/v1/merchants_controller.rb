@@ -9,27 +9,36 @@ class Api::V1::MerchantsController < Api::ApiController
   end
 
   def find
-    if params[:id]
-      respond_with Merchant.find(params[:id].to_i)
-    elsif params[:created_at]
-      respond_with Merchant.find_by(created_at: params[:created_at])
-    elsif params[:updated_at]
-      respond_with Merchant.find_by(updated_at: params[:updated_at])
-    elsif params[:name]
-      respond_with Merchant.where('lower(name) = ?', params[:name].downcase).take
+    key = params.keys.first
+    value = params[key]
+    if params_type == "integer"
+      respond_with Merchant.where("#{key}"=> value.to_i).take
+    elsif params_type == "time"
+      respond_with Merchant.where("#{key}"=> value).take
+    elsif params_type == "string"
+      respond_with Merchant.where("lower(#{key}) = ?", value.downcase).take
     end
   end
 
   def find_all
-    if params[:id]
-      respond_with Merchant.where(id: params[:id].to_i)
-    elsif params[:created_at]
-      respond_with Merchant.where(created_at: params[:created_at])
-    elsif params[:updated_at]
-      respond_with Merchant.where(updated_at: params[:updated_at])
-    elsif params[:name]
-      respond_with Merchant.where('lower(name) = ?', params[:name].downcase)
+    key = params.keys.first
+    value = params[key]
+    if params_type == "integer"
+      respond_with Merchant.where("#{key}"=> value.to_i)
+    elsif params_type == "time"
+      respond_with Merchant.where("#{key}"=> value)
+    elsif params_type == "string"
+      respond_with Merchant.where("lower(#{key}) = ?", value.downcase)
     end
   end
+
+  private
+    def params_map
+      {"id" => "integer", "created_at" => "time", "updated_at" => "time", "name" => "string"}
+    end
+
+    def params_type
+      params_map[params.keys.first]
+    end
 
 end
