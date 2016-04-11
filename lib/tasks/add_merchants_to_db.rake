@@ -10,4 +10,12 @@ namespace :import_csv do
       puts "Created: #{merchant.id} #{merchant.name}"
     end
   end
+
+  task load_customers: :environment do
+    contents = CSV.open "lib/support/customers.csv", headers: true
+    contents.each do |row|
+      customer = Customer.create!(row.to_hash)
+      puts "Created: #{customer.id} #{customer.first_name} #{customer.last_name}"
+    end
+  end
 end
