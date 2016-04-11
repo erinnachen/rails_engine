@@ -1,30 +1,36 @@
 class Api::V1::CustomersFinderController < Api::ApiController
   respond_to :json
   def find
-    if params[:id]
-      respond_with Customer.find(params[:id].to_i)
-    elsif params[:created_at]
-      respond_with Customer.find_by(created_at: params[:created_at])
-    elsif params[:updated_at]
-      respond_with Customer.find_by(updated_at: params[:updated_at])
-    elsif params[:first_name]
-      respond_with Customer.where('lower(first_name) = ?', params[:first_name].downcase).take
-    elsif params[:last_name]
-      respond_with Customer.where('lower(last_name) = ?', params[:last_name].downcase).take
+    key = params.keys.first
+    value = params[key]
+    if params_type == "integer"
+      respond_with Customer.where("#{key}"=> value.to_i).take
+    elsif params_type == "time"
+      respond_with Customer.where("#{key}"=> value).take
+    elsif params_type == "string"
+      respond_with Customer.where("lower(#{key}) = ?", value.downcase).take
     end
   end
 
   def find_all
-    if params[:id]
-      respond_with Customer.where(id: params[:id].to_i)
-    elsif params[:created_at]
-      respond_with Customer.where(created_at: params[:created_at])
-    elsif params[:updated_at]
-      respond_with Customer.where(updated_at: params[:updated_at])
-    elsif params[:first_name]
-      respond_with Customer.where('lower(first_name) = ?', params[:first_name].downcase)
-    elsif params[:last_name]
-      respond_with Customer.where('lower(last_name) = ?', params[:last_name].downcase)
+    key = params.keys.first
+    value = params[key]
+    if params_type == "integer"
+      respond_with Customer.where("#{key}"=> value.to_i)
+    elsif params_type == "time"
+      respond_with Customer.where("#{key}"=> value)
+    elsif params_type == "string"
+      respond_with Customer.where("lower(#{key}) = ?", value.downcase)
     end
   end
+
+  private
+
+    def params_map
+      {"id" => "integer", "created_at" => "time", "updated_at" => "time", "first_name" => "string", "last_name" => "string"}
+    end
+
+    def params_type
+      params_map[params.keys.first]
+    end
 end
