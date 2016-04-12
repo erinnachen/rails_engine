@@ -12,11 +12,11 @@ class Api::V1::MerchantsController < Api::ApiController
     key = params.keys.first
     value = params[key]
     if params_type == "integer"
-      respond_with Merchant.where("#{key}"=> value.to_i).take
+      respond_with Merchant.where("#{key}"=> value.to_i).first
     elsif params_type == "time"
-      respond_with Merchant.where("#{key}"=> value).take
+      respond_with Merchant.where("#{key}"=> value).first
     elsif params_type == "string"
-      respond_with Merchant.where("lower(#{key}) = ?", value.downcase).take
+      respond_with Merchant.where("lower(#{key}) = ?", value.downcase).first
     end
   end
 
