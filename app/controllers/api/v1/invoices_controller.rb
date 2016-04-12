@@ -18,6 +18,14 @@ class Api::V1::InvoicesController < Api::ApiController
     end
   end
 
+  def find_all
+    unless params_lower?
+      respond_with Invoice.where(invoice_params)
+    else
+      key = params.keys.first
+      respond_with Invoice.where("lower(#{key}) = ?", params[key].downcase)
+    end
+  end
 
   private
     def invoice_params

@@ -1,14 +1,25 @@
 Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
-      get '/customers/find', to: "customers_finder#find"
-      get '/customers/find_all', to: "customers_finder#find_all"
-      get '/merchants/find'
-      get '/merchants/find_all'
-      get '/invoices/find'
-      resources :merchants, only: [:index, :show]
-      resources :customers, only: [:index, :show]
-      resources :invoices, only: [:index, :show]
+      resources :merchants, only: [:index, :show] do
+        collection do
+          get 'find'
+          get 'find_all'
+        end
+      end
+      resources :customers, only: [:index, :show] do
+        collection do
+          get 'find', to: "customers_finder#find"
+          get 'find_all', to: "customers_finder#find_all"
+        end
+      end
+
+      resources :invoices, only: [:index, :show] do
+        collection do
+          get 'find'
+          get 'find_all'
+        end
+      end
     end
   end
 end
