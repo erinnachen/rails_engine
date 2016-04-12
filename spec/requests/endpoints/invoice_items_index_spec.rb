@@ -16,6 +16,6 @@ RSpec.describe "GET /api/v1/invoice_items" do
     expect(invoice_item_json["item_id"]).to eq invoice_item1.item_id
     expect(invoice_item_json["invoice_id"]).to eq invoice_item1.invoice_id
     expect(invoice_item_json["quantity"]).to eq invoice_item1.quantity
-    expect(invoice_item_json["unit_price"]).to eq invoice_item1.unit_price
+    expect(invoice_item_json["unit_price"]).to eq format_price(invoice_item1.unit_price)
   end
 end

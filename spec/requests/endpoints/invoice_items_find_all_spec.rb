@@ -16,7 +16,7 @@ RSpec.describe "GET /api/v1/invoice_items/find_all?param=value" do
       expect(invoice_item_json["item_id"]).to eq invoice_item2.item_id
       expect(invoice_item_json["invoice_id"]).to eq invoice_item2.invoice_id
       expect(invoice_item_json["quantity"]).to eq invoice_item2.quantity
-      expect(invoice_item_json["unit_price"]).to eq invoice_item2.unit_price
+      expect(invoice_item_json["unit_price"]).to eq format_price(invoice_item2.unit_price)
     end
   end
 
@@ -34,7 +34,7 @@ RSpec.describe "GET /api/v1/invoice_items/find_all?param=value" do
       expect(invoice_item_json["item_id"]).to eq invoice_item1.item_id
       expect(invoice_item_json["invoice_id"]).to eq invoice_item1.invoice_id
       expect(invoice_item_json["quantity"]).to eq invoice_item1.quantity
-      expect(invoice_item_json["unit_price"]).to eq invoice_item1.unit_price
+      expect(invoice_item_json["unit_price"]).to eq format_price(invoice_item1.unit_price)
     end
   end
 
@@ -52,7 +52,7 @@ RSpec.describe "GET /api/v1/invoice_items/find_all?param=value" do
       expect(invoice_item_json["item_id"]).to eq invoice_item1.item_id
       expect(invoice_item_json["invoice_id"]).to eq invoice_item1.invoice_id
       expect(invoice_item_json["quantity"]).to eq invoice_item1.quantity
-      expect(invoice_item_json["unit_price"]).to eq invoice_item1.unit_price
+      expect(invoice_item_json["unit_price"]).to eq format_price(invoice_item1.unit_price)
     end
   end
 
@@ -70,7 +70,7 @@ RSpec.describe "GET /api/v1/invoice_items/find_all?param=value" do
       expect(invoice_item_json["item_id"]).to eq invoice_item1.item_id
       expect(invoice_item_json["invoice_id"]).to eq invoice_item1.invoice_id
       expect(invoice_item_json["quantity"]).to eq invoice_item1.quantity
-      expect(invoice_item_json["unit_price"]).to eq invoice_item1.unit_price
+      expect(invoice_item_json["unit_price"]).to eq format_price(invoice_item1.unit_price)
     end
   end
 
@@ -79,7 +79,7 @@ RSpec.describe "GET /api/v1/invoice_items/find_all?param=value" do
       invoice_item1 = create(:invoice_item)
       invoice_item2 = create(:invoice_item, unit_price: invoice_item1.unit_price)
 
-      get "/api/v1/invoice_items/find_all?unit_price=#{invoice_item1.unit_price}"
+      get "/api/v1/invoice_items/find_all?unit_price=#{format_price(invoice_item1.unit_price)}"
       expect(response.status).to eq 200
       invoice_items = parsed_body
       expect(invoice_items.count).to eq 2
@@ -88,7 +88,7 @@ RSpec.describe "GET /api/v1/invoice_items/find_all?param=value" do
       expect(invoice_item_json["item_id"]).to eq invoice_item1.item_id
       expect(invoice_item_json["invoice_id"]).to eq invoice_item1.invoice_id
       expect(invoice_item_json["quantity"]).to eq invoice_item1.quantity
-      expect(invoice_item_json["unit_price"]).to eq invoice_item1.unit_price
+      expect(invoice_item_json["unit_price"]).to eq format_price(invoice_item1.unit_price)
     end
   end
 
@@ -107,7 +107,7 @@ RSpec.describe "GET /api/v1/invoice_items/find_all?param=value" do
       expect(invoice_item_json["item_id"]).to eq invoice_item1.item_id
       expect(invoice_item_json["invoice_id"]).to eq invoice_item1.invoice_id
       expect(invoice_item_json["quantity"]).to eq invoice_item1.quantity
-      expect(invoice_item_json["unit_price"]).to eq invoice_item1.unit_price
+      expect(invoice_item_json["unit_price"]).to eq format_price(invoice_item1.unit_price)
     end
   end
 
@@ -126,7 +126,7 @@ RSpec.describe "GET /api/v1/invoice_items/find_all?param=value" do
       expect(invoice_item_json["item_id"]).to eq invoice_item2.item_id
       expect(invoice_item_json["invoice_id"]).to eq invoice_item2.invoice_id
       expect(invoice_item_json["quantity"]).to eq invoice_item2.quantity
-      expect(invoice_item_json["unit_price"]).to eq invoice_item2.unit_price
+      expect(invoice_item_json["unit_price"]).to eq format_price(invoice_item2.unit_price)
     end
   end
 end
