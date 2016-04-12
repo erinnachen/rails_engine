@@ -9,8 +9,8 @@ Rails.application.routes.draw do
           get 'random'
         end
         member do
-          get 'items', to: "merchants/items#index"
-          get 'invoices', to: "merchants/invoices#index"
+          get 'items'#, to: "merchants/items#index"
+          get 'invoices'#, to: "merchants/invoices#index"
         end
       end
 
@@ -19,6 +19,9 @@ Rails.application.routes.draw do
           get 'find', to: "customers_finder#find"
           get 'find_all', to: "customers_finder#find_all"
           get 'random', to: "customers_finder#random"
+        end
+        member do
+          get 'invoices'
         end
       end
 
@@ -37,7 +40,7 @@ Rails.application.routes.draw do
           get 'random'
         end
         member do
-          get 'invoice', to: "transactions/invoices#show"
+          get 'invoice'#, to: "transactions/invoices#show"
         end
       end
 

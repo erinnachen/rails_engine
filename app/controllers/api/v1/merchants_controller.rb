@@ -30,6 +30,14 @@ class Api::V1::MerchantsController < Api::ApiController
     respond_with Merchant.take
   end
 
+  def items
+    respond_with Merchant.find(params[:id]).items
+  end
+
+  def invoices
+    respond_with Merchant.find(params[:id]).invoices
+  end
+
   private
     def merchant_params
       params.permit(:id, :created_at, :updated_at)
