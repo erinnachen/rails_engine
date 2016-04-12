@@ -27,8 +27,9 @@ class Api::FinderController < Api::ApiController
 
   private
     def model
-      params[:controller][/\/([a-z]+)s\z/]
-      $1.capitalize.constantize
+      params[:controller][/\/([a-z_]+)s\z/]
+      model = $1.split("_").map {|m| m.capitalize}.join
+      model.constantize
     end
 
     def key

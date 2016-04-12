@@ -1,4 +1,13 @@
+require 'faker'
+
 FactoryGirl.define do
+  factory :invoice_item do
+    item
+    invoice
+    quantity Random.rand(25)
+    unit_price Random.rand(100..8_000_000)
+  end
+
   factory :item do
     name
     description Faker::Lorem.sentence(3)
