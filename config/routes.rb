@@ -30,7 +30,12 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :items, only: [:index]
+      resources :items, only: [:index, :show] do
+        collection do
+          get 'find'
+          get 'find_all'
+        end
+      end
 
     end
   end

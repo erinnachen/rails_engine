@@ -4,6 +4,8 @@ FactoryGirl.define do
     description Faker::Lorem.sentence(3)
     unit_price Random.rand(100..8_000_000)
     merchant
+    created_at "2002-04-30T14:33:06.000Z"
+    updated_at "2016-01-28T17:04:57.000Z"
   end
 
   factory :transaction do
