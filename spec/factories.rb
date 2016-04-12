@@ -58,5 +58,11 @@ FactoryGirl.define do
     updated_at "2016-01-28T08:30:20.000Z"
   end
 
+  factory :merchant_with_items, parent: :merchant do |merchant|
+    items { build_list :item, Random.rand(1..6) }
+  end
 
+  factory :merchant_with_invoices, parent: :merchant do |merchant|
+    invoices { build_list :invoice, Random.rand(1..6) }
+  end
 end
