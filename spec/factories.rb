@@ -1,4 +1,11 @@
 FactoryGirl.define do
+  factory :item do
+    name
+    description Faker::Lorem.sentence(3)
+    unit_price Random.rand(100..8_000_000)
+    merchant
+  end
+
   factory :transaction do
     invoice
     credit_card_number "4433 1213 1234 8850"
@@ -22,7 +29,8 @@ FactoryGirl.define do
   sequence :last_name do |n|
     Faker::Name.last_name + n.to_s
   end
-  sequence(:name) { |n|  "Merchant #{n}" }
+
+  sequence(:name) { |n| Faker::Name.name + n.to_s }
 
   factory :customer do
     first_name

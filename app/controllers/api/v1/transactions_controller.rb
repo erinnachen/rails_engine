@@ -1,14 +1,6 @@
 class Api::V1::TransactionsController < Api::FinderController
   respond_to :json
 
-  def index
-    respond_with Transaction.all
-  end
-
-  def show
-    respond_with Transaction.find(params[:id])
-  end
-
   private
     def permitted_params
       params.permit(:id, :invoice_id, :credit_card_number, :created_at, :updated_at)
