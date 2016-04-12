@@ -3,6 +3,8 @@ FactoryGirl.define do
     invoice
     credit_card_number "4433 1213 1234 8850"
     result "success"
+    created_at "2002-04-30T14:33:06.000Z"
+    updated_at "2016-01-28T17:04:57.000Z"
   end
 
   factory :invoice do
