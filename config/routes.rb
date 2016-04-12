@@ -35,6 +35,8 @@ Rails.application.routes.draw do
           get 'transactions'
           get 'invoice_items'
           get 'items'
+          get 'customer'
+          get 'merchant'
         end
       end
 
