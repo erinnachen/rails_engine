@@ -6,6 +6,8 @@ FactoryGirl.define do
     invoice
     quantity Random.rand(25)
     unit_price Random.rand(100..8_000_000)
+    created_at "2002-04-30T14:33:06.000Z"
+    updated_at "2016-01-28T17:04:57.000Z"
   end
 
   factory :item do
