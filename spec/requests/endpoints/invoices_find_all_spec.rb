@@ -62,7 +62,7 @@ RSpec.describe "GET /api/v1/invoices/find_all?param=value" do
       invoice3 = create(:invoice, status: "peNDing")
       invoice4 = create(:invoice, status: "shipped")
 
-      get "/api/v1/invoices/find_all?status=John"
+      get "/api/v1/invoices/find_all?status=pending"
 
       expect(response.status).to eq 200
 

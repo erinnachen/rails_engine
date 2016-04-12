@@ -7,6 +7,7 @@ Rails.application.routes.draw do
           get 'find_all'
         end
       end
+
       resources :customers, only: [:index, :show] do
         collection do
           get 'find', to: "customers_finder#find"
@@ -15,6 +16,13 @@ Rails.application.routes.draw do
       end
 
       resources :invoices, only: [:index, :show] do
+        collection do
+          get 'find'
+          get 'find_all'
+        end
+      end
+
+      resources :transactions, only: [:index, :show] do
         collection do
           get 'find'
           get 'find_all'

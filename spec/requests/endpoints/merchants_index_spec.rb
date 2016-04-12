@@ -9,7 +9,6 @@ RSpec.describe "GET /api/v1/merchants" do
     get "/api/v1/merchants"
 
     expect(response.status).to eq 200
-    #binding.pry
     expect(parsed_body.count).to eq 2
 
     merchant_json = parsed_body.first

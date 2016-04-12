@@ -1,4 +1,10 @@
 FactoryGirl.define do
+  factory :transaction do
+    invoice
+    credit_card_number "4433 1213 1234 8850"
+    result "success"
+  end
+
   factory :invoice do
     customer
     merchant
