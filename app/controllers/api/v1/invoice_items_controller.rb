@@ -1,4 +1,12 @@
 class Api::V1::InvoiceItemsController < Api::FinderController
+  def invoice
+    respond_with InvoiceItem.find(params[:id]).invoice
+  end
+
+  def item
+    respond_with InvoiceItem.find(params[:id]).item
+  end
+
   private
     def params_lower?
     end
