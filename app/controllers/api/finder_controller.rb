@@ -9,6 +9,10 @@ class Api::FinderController < Api::ApiController
     respond_with model.find(params[:id])
   end
 
+  def random
+    respond_with model.take
+  end
+
   def find
     unless params_lower?
       respond_with model.find_by(permitted_params)

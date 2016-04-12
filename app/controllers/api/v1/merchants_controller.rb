@@ -26,6 +26,10 @@ class Api::V1::MerchantsController < Api::ApiController
     end
   end
 
+  def random
+    respond_with Merchant.take
+  end
+
   private
     def merchant_params
       params.permit(:id, :created_at, :updated_at)

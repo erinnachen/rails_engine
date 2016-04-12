@@ -27,6 +27,10 @@ class Api::V1::InvoicesController < Api::ApiController
     end
   end
 
+  def random
+    respond_with Invoice.take
+  end
+
   private
     def invoice_params
       params.permit(:id, :merchant_id, :customer_id, :updated_at, :created_at)

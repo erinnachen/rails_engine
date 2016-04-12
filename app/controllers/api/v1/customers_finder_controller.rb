@@ -18,6 +18,10 @@ class Api::V1::CustomersFinderController < Api::ApiController
     end
   end
 
+  def random
+    respond_with Customer.take
+  end
+
   private
 
     def customer_params
