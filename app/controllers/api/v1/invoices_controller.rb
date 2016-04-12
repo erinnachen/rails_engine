@@ -10,23 +10,21 @@ class Api::V1::InvoicesController < Api::ApiController
   end
 
   def find
-    key = params.keys.first
-    value = params[key]
-    if params_type == "integer"
-      respond_with Invoice.where("#{key}"=> value.to_i).first
-    elsif params_type == "time"
-      respond_with Invoice.where("#{key}"=> value).first
-    elsif params_type == "string"
-      respond_with Invoice.where("lower(#{key}) = ?", value.downcase).first
+    unless params_lower?
+      respond_with Invoice.find_by(invoice_params)
+    else
+      key = params.keys.first
+      respond_with Invoice.where("lower(#{key}) = ?", params[key].downcase).first
     end
   end
 
+
   private
-    def params_map
-      {"id" => "integer", "merchant_id" => "integer","customer_id" => "integer", "status" => "string", "created_at" => "time", "updated_at" => "time"}
+    def invoice_params
+      params.permit(:id, :merchant_id, :customer_id, :updated_at, :created_at)
     end
 
-    def params_type
-      params_map[params.keys.first]
+    def params_lower?
+      !!params[:status]
     end
 end

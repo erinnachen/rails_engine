@@ -1,36 +1,30 @@
 class Api::V1::CustomersFinderController < Api::ApiController
   respond_to :json
   def find
-    key = params.keys.first
-    value = params[key]
-    if params_type == "integer"
-      respond_with Customer.where("#{key}"=> value.to_i).first
-    elsif params_type == "time"
-      respond_with Customer.where("#{key}"=> value).first
-    elsif params_type == "string"
-      respond_with Customer.where("lower(#{key}) = ?", value.downcase).first
+    unless params_lower?
+      respond_with Customer.find_by(customer_params)
+    else
+      key = params.keys.first
+      respond_with Customer.where("lower(#{key}) = ?", params[key].downcase).first
     end
   end
 
   def find_all
-    key = params.keys.first
-    value = params[key]
-    if params_type == "integer"
-      respond_with Customer.where("#{key}"=> value.to_i)
-    elsif params_type == "time"
-      respond_with Customer.where("#{key}"=> value)
-    elsif params_type == "string"
-      respond_with Customer.where("lower(#{key}) = ?", value.downcase)
+    unless params_lower?
+      respond_with Customer.where(customer_params)
+    else
+      key = params.keys.first
+      respond_with Customer.where("lower(#{key}) = ?", params[key].downcase)
     end
   end
 
   private
 
-    def params_map
-      {"id" => "integer", "created_at" => "time", "updated_at" => "time", "first_name" => "string", "last_name" => "string"}
+    def customer_params
+      params.permit(:id, :created_at, :updated_at)
     end
 
-    def params_type
-      params_map[params.keys.first]
+    def params_lower?
+      !!params[:first_name] || params[:last_name]
     end
 end
