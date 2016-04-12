@@ -92,4 +92,8 @@ module SpecHelpers
   def parsed_body
     JSON.parse(response.body)
   end
+
+  def format_price(price)
+    "#{format("%.2f", price/100.0)}"
+  end
 end

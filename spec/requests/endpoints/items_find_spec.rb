@@ -12,7 +12,7 @@ RSpec.describe "GET /api/v1/items/find?param=value" do
       expect(item_json["id"]).to eq item1.id
       expect(item_json["name"]).to eq item1.name
       expect(item_json["description"]).to eq item1.description
-      expect(item_json["unit_price"]).to eq item1.unit_price
+      expect(item_json["unit_price"]).to eq format_price(item1.unit_price)
       expect(item_json["merchant_id"]).to eq item1.merchant_id
     end
   end
@@ -27,7 +27,7 @@ RSpec.describe "GET /api/v1/items/find?param=value" do
       expect(item_json["id"]).to eq item1.id
       expect(item_json["name"]).to eq item1.name
       expect(item_json["description"]).to eq item1.description
-      expect(item_json["unit_price"]).to eq item1.unit_price
+      expect(item_json["unit_price"]).to eq format_price(item1.unit_price)
       expect(item_json["merchant_id"]).to eq item1.merchant_id
     end
   end
@@ -43,7 +43,7 @@ RSpec.describe "GET /api/v1/items/find?param=value" do
       expect(item_json["id"]).to eq item1.id
       expect(item_json["name"]).to eq item1.name
       expect(item_json["description"]).to eq item1.description
-      expect(item_json["unit_price"]).to eq item1.unit_price
+      expect(item_json["unit_price"]).to eq format_price(item1.unit_price)
       expect(item_json["merchant_id"]).to eq item1.merchant_id
     end
   end
@@ -59,7 +59,7 @@ RSpec.describe "GET /api/v1/items/find?param=value" do
       expect(item_json["id"]).to eq item1.id
       expect(item_json["name"]).to eq item1.name
       expect(item_json["description"]).to eq item1.description
-      expect(item_json["unit_price"]).to eq item1.unit_price
+      expect(item_json["unit_price"]).to eq format_price(item1.unit_price)
       expect(item_json["merchant_id"]).to eq item1.merchant_id
     end
   end
@@ -67,13 +67,14 @@ RSpec.describe "GET /api/v1/items/find?param=value" do
   context "find by unit price" do
     it "returns a single item with the unit price" do
       item1 = create(:item, unit_price: 56700)
-      get "/api/v1/items/find?unit_price=56700"
+
+      get "/api/v1/items/find?unit_price=567.00"
       expect(response.status).to eq 200
       item_json = parsed_body
       expect(item_json["id"]).to eq item1.id
       expect(item_json["name"]).to eq item1.name
       expect(item_json["description"]).to eq item1.description
-      expect(item_json["unit_price"]).to eq 56700
+      expect(item_json["unit_price"]).to eq "567.00"
       expect(item_json["merchant_id"]).to eq item1.merchant_id
     end
   end
@@ -89,7 +90,7 @@ RSpec.describe "GET /api/v1/items/find?param=value" do
       expect(item_json["id"]).to eq item1.id
       expect(item_json["name"]).to eq item1.name
       expect(item_json["description"]).to eq item1.description
-      expect(item_json["unit_price"]).to eq item1.unit_price
+      expect(item_json["unit_price"]).to eq format_price(item1.unit_price)
       expect(item_json["merchant_id"]).to eq item1.merchant_id
     end
   end
@@ -106,7 +107,7 @@ RSpec.describe "GET /api/v1/items/find?param=value" do
       expect(item_json["id"]).to eq item1.id
       expect(item_json["name"]).to eq item1.name
       expect(item_json["description"]).to eq item1.description
-      expect(item_json["unit_price"]).to eq item1.unit_price
+      expect(item_json["unit_price"]).to eq format_price(item1.unit_price)
       expect(item_json["merchant_id"]).to eq item1.merchant_id
     end
   end

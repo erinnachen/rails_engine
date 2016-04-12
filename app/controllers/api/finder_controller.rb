@@ -39,4 +39,8 @@ class Api::FinderController < Api::ApiController
     def key
       params.keys.first
     end
+
+    def format_unit_price
+      params[:unit_price] = params[:unit_price].split('.').join.to_i
+    end
 end
