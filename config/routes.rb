@@ -8,8 +8,8 @@ Rails.application.routes.draw do
           get 'random'
         end
         member do
-          get 'items'#, to: "merchants/items#index"
-          get 'invoices'#, to: "merchants/invoices#index"
+          get 'items'
+          get 'invoices'
         end
       end
 
@@ -21,6 +21,7 @@ Rails.application.routes.draw do
         end
         member do
           get 'invoices'
+          get 'transactions'
         end
       end
 
@@ -46,7 +47,7 @@ Rails.application.routes.draw do
           get 'random'
         end
         member do
-          get 'invoice'#, to: "transactions/invoices#show"
+          get 'invoice'
         end
       end
 
