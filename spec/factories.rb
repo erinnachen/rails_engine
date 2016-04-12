@@ -69,4 +69,12 @@ FactoryGirl.define do
   factory :customer_with_invoices, parent: :customer do |customer|
     invoices { build_list :invoice, Random.rand(1..6) }
   end
+
+  factory :invoice_with_transactions, parent: :invoice do |invoice|
+    transactions { build_list :transaction, Random.rand(1..6) }
+  end
+
+  factory :invoice_with_invoice_items, parent: :invoice do |invoice|
+    invoice_items { build_list :invoice_item, Random.rand(1..6) }
+  end
 end

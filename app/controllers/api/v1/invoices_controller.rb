@@ -31,6 +31,18 @@ class Api::V1::InvoicesController < Api::ApiController
     respond_with Invoice.take
   end
 
+  def transactions
+    respond_with Invoice.find(params[:id]).transactions
+  end
+
+  def invoice_items
+    respond_with Invoice.find(params[:id]).invoice_items
+  end
+
+  def items
+    respond_with Invoice.find(params[:id]).items
+  end
+
   private
     def invoice_params
       params.permit(:id, :merchant_id, :customer_id, :updated_at, :created_at)
