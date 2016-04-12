@@ -1,4 +1,12 @@
 FactoryGirl.define do
+  factory :invoice do
+    customer
+    merchant
+    status "shipped"
+    created_at "2002-04-30T14:33:06.000Z"
+    updated_at "2016-01-28T17:04:57.000Z"
+  end
+
   sequence :first_name do |n|
     Faker::Name.first_name + n.to_s
   end

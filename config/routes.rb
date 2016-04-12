@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       get '/merchants/find_all'
       resources :merchants, only: [:index, :show]
       resources :customers, only: [:index, :show]
+      resources :invoices, only: [:index]
     end
   end
 end
