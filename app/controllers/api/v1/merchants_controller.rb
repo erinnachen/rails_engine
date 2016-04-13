@@ -1,5 +1,4 @@
-class Api::V1::MerchantsController < Api::ApiController
-  respond_to :json
+class Api::V1::MerchantsController < Api::ModelController
   def index
     respond_with Merchant.all
   end

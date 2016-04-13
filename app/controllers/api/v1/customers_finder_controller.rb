@@ -1,5 +1,4 @@
-class Api::V1::CustomersFinderController < Api::ApiController
-  respond_to :json
+class Api::V1::CustomersFinderController < Api::ModelController
   def find
     unless params_lower?
       respond_with Customer.find_by(customer_params)

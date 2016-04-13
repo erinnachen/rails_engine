@@ -1,6 +1,4 @@
-class Api::FinderController < Api::ApiController
-  respond_to :json
-
+class Api::FinderController < Api::BaseController
   def index
     respond_with model.all
   end

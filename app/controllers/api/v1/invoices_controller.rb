@@ -1,6 +1,4 @@
-class Api::V1::InvoicesController < Api::ApiController
-  respond_to :json
-
+class Api::V1::InvoicesController < Api::ModelController
   def index
     respond_with Invoice.all
   end

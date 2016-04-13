@@ -1,6 +1,4 @@
 class Api::V1::TransactionsController < Api::FinderController
-  respond_to :json
-
   def invoice
     respond_with Transaction.find(params[:id]).invoice
   end
