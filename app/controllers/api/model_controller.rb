@@ -7,7 +7,5 @@ class Api::ModelController < Api::BaseController
     respond_with model.find(params[:id])
   end
 
-  def random
-    respond_with model.take
-  end
+
 end
