@@ -3,8 +3,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :merchants, only: [:index, :show] do
         collection do
-          get 'find'
-          get 'find_all'
+          get 'find', to: "merchants_finder#find"
+          get 'find_all', to: "merchants_finder#find_all" 
           get 'random'
           get 'most_revenue'
           get 'revenue', to: 'merchants#total_revenue'
