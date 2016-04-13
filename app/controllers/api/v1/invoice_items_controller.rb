@@ -1,4 +1,4 @@
-class Api::V1::InvoiceItemsController < Api::FinderController
+class Api::V1::InvoiceItemsController < Api::ModelController
   def invoice
     respond_with InvoiceItem.find(params[:id]).invoice
   end
@@ -8,11 +8,7 @@ class Api::V1::InvoiceItemsController < Api::FinderController
   end
 
   private
-    def params_lower?
-    end
-
-    def permitted_params
-      format_unit_price if params[:unit_price]
-      params.permit(:id, :invoice_id, :item_id, :quantity, :unit_price,  :created_at, :updated_at)
+    def model
+      InvoiceItem
     end
 end
