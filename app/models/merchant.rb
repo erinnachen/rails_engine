@@ -8,12 +8,11 @@ class Merchant < ActiveRecord::Base
   validates :name, presence: true
 
   def customers_with_pending_invoices
-    customers.
     customers = []
     invoices.each do |invoice|
-      customers << Customer.find(invoice.customer_id) unless invoice.successful?
+      customers << Customer.find(invoice.customer_id) if invoice.pending?
     end
-    #customers.uniq
+    customers.uniq
   end
 
   def favorite_customer
@@ -34,10 +33,15 @@ class Merchant < ActiveRecord::Base
 
   def self.most_revenue(quantity)
     #.order("revenue DESC").take(quantity)
-    all.sort_by {|merchant| -1*merchant.revenue }.first(quantity)
+    self.select("merchants.*, sum('invoice_items.quantity*invoice_items.price') as revenue").joins(:transactions, :invoice_items).where(transactions: { result: "success" }).group("merchants.id").order("revenue DESC").take(quantity)
+    #all.sort_by {|merchant| -1*merchant.revenue }.first(quantity)
   end
 
   def self.revenue(date)
     Invoice.where(created_at: date).joins(:transactions, :invoice_items).where(transactions: { result: "success" }).sum('invoice_items.quantity*invoice_items.unit_price')
+  end
+
+  def self.most_items(quantity)
+    Merchant.select("merchants.*, sum(invoice_items.quantity) as items_count").joins(:transactions, :invoice_items).where(transactions: { result: "success" }).group("merchants.id").order("items_count DESC").take(quantity)
   end
 end

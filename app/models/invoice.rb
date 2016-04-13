@@ -12,4 +12,8 @@ class Invoice < ActiveRecord::Base
   def revenue
     self.joins(:transactions, :invoice_items).where(id: id, transactions: { result: "success" }).sum('invoice_items.quantity*invoice_items.unit_price')
   end
+
+  def pending?
+    !transactions.all? {|txn| txn.result == "success"}
+  end
 end
