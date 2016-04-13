@@ -63,12 +63,12 @@ Rails.application.routes.draw do
           get 'find', to: "items_finder#show"
           get 'find_all', to: "items_finder#index"
           get 'random', to: "items_random#show"
-          get 'most_items'
+          get 'most_items', to: "items_most_items#index"
         end
         member do
-          get 'invoice_items'
-          get 'merchant'
-          get 'best_day'
+          get 'invoice_items', to: "items_invoice_items#index"
+          get 'merchant', to: "items_merchants#show"
+          get 'best_day', to: "items_best_days#show"
         end
       end
 
