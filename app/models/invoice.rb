@@ -16,4 +16,8 @@ class Invoice < ActiveRecord::Base
   def pending?
     !transactions.all? {|txn| txn.result == "success"}
   end
+
+  def successful?
+    !!transactions.find {|txn| txn.result == "success"}
+  end
 end
