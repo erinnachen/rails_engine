@@ -1,19 +1,6 @@
-class Api::FinderController < Api::ApiController
-  respond_to :json
-
-  def index
-    respond_with model.all
-  end
+class Api::FinderController < Api::BaseController
 
   def show
-    respond_with model.find(params[:id])
-  end
-
-  def random
-    respond_with model.take
-  end
-
-  def find
     unless params_lower?
       respond_with model.find_by(permitted_params)
     else
@@ -21,7 +8,7 @@ class Api::FinderController < Api::ApiController
     end
   end
 
-  def find_all
+  def index
     unless params_lower?
       respond_with model.where(permitted_params)
     else
@@ -30,11 +17,6 @@ class Api::FinderController < Api::ApiController
   end
 
   private
-    def model
-      params[:controller][/\/([a-z_]+)s\z/]
-      model = $1.split("_").map {|m| m.capitalize}.join
-      model.constantize
-    end
 
     def key
       params.keys.first
