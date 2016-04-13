@@ -79,8 +79,8 @@ Rails.application.routes.draw do
           get 'random', to: "invoice_items_random#show"
         end
         member do
-          get 'item'
-          get 'invoice'
+          get 'item', to: "invoice_items_items#show"
+          get 'invoice', to: "invoice_items_invoices#show"
         end
       end
 
