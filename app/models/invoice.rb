@@ -9,12 +9,11 @@ class Invoice < ActiveRecord::Base
   validates :customer_id, presence: true
   validates :status, presence: true
 
-  def successful?
-    transactions.where(result: "success").count > 0
+  def revenue
+    self.joins(:transactions, :invoice_items).where(id: id, transactions: { result: "success" }).sum('invoice_items.quantity*invoice_items.unit_price')
   end
 
-  def revenue
-    return 0 unless successful?
-    invoice_items.reduce(0) {|acc, inv_item| acc+inv_item.total}
+  def pending?
+    !transactions.all? {|txn| txn.result == "success"}
   end
 end

@@ -58,6 +58,10 @@ class Api::V1::MerchantsController < Api::ApiController
     respond_with Merchant.most_revenue(params[:quantity].to_i)
   end
 
+  def most_items
+    respond_with Merchant.most_items(params[:quantity].to_i)
+  end
+
   private
     def merchant_params
       params.permit(:id, :created_at, :updated_at)
