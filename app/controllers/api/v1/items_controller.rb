@@ -15,6 +15,10 @@ class Api::V1::ItemsController < Api::FinderController
     end
   end
 
+  def best_day
+    respond_with Item.find(params[:id]).best_day
+  end
+
   private
     def params_lower?
       !!params[:name] || !!params[:description]

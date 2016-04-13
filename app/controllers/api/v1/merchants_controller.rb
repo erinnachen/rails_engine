@@ -50,6 +50,14 @@ class Api::V1::MerchantsController < Api::ApiController
     respond_with Merchant.find(params[:id]).revenue(params[:date]), serializer: RevenueSerializer
   end
 
+  def total_revenue
+    respond_with Merchant.revenue(params[:date]), serializer: TotalRevenueSerializer
+  end
+
+  def most_revenue
+    respond_with Merchant.most_revenue(params[:quantity].to_i)
+  end
+
   private
     def merchant_params
       params.permit(:id, :created_at, :updated_at)
