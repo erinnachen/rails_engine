@@ -6,10 +6,15 @@ Rails.application.routes.draw do
           get 'find'
           get 'find_all'
           get 'random'
+          get 'most_revenue'
+          get 'revenue', to: 'merchants#total_revenue'
         end
         member do
           get 'items'
           get 'invoices'
+          get 'customers_with_pending_invoices'
+          get 'favorite_customer'
+          get 'revenue'
         end
       end
 
@@ -22,6 +27,7 @@ Rails.application.routes.draw do
         member do
           get 'invoices'
           get 'transactions'
+          get 'favorite_merchant'
         end
       end
 
@@ -60,6 +66,7 @@ Rails.application.routes.draw do
         member do
           get 'invoice_items'
           get 'merchant'
+          get 'best_day'
         end
       end
 
