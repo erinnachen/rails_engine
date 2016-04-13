@@ -10,6 +10,8 @@ Rails.application.routes.draw do
         member do
           get 'items'
           get 'invoices'
+          get 'customers_with_pending_invoices'
+          get 'favorite_customer'
         end
       end
 
