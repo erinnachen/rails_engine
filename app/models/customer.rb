@@ -6,14 +6,12 @@ class Customer < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  def success_transactions_count(merchant_id)
-    transactions.where(result: "success", invoices: {merchant_id: merchant_id}).count
-  end
-
-  
-
   def favorite_merchant
-    merchants.max_by { |merchant| success_transactions_count(merchant.id) }
+    merchants.select("merchants.*,
+                      count(invoices.merchant_id) as transactions_count")
+             .joins(:invoices).joins(:transactions)
+             .where(transactions: {result: "success"})
+             .group("merchants.id").order("transactions_count DESC").take
   end
 
 end
