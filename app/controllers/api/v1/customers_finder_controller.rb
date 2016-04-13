@@ -1,7 +1,4 @@
 class Api::V1::CustomersFinderController < Api::FinderController
-  def random
-    respond_with Customer.take
-  end
 
   private
 

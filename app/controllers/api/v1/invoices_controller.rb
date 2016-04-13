@@ -1,9 +1,5 @@
 class Api::V1::InvoicesController < Api::ModelController
 
-  def random
-    respond_with Invoice.take
-  end
-
   def transactions
     respond_with Invoice.find(params[:id]).transactions
   end

@@ -1,7 +1,4 @@
 class Api::V1::MerchantsController < Api::ModelController
-  def random
-    respond_with Merchant.take
-  end
 
   def items
     respond_with Merchant.find(params[:id]).items
