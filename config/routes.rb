@@ -49,8 +49,8 @@ Rails.application.routes.draw do
 
       resources :transactions, only: [:index, :show] do
         collection do
-          get 'find'
-          get 'find_all'
+          get 'find', to: "transactions_finder#find"
+          get 'find_all', to: "transactions_finder#find_all"
           get 'random'
         end
         member do
