@@ -60,8 +60,8 @@ Rails.application.routes.draw do
 
       resources :items, only: [:index, :show] do
         collection do
-          get 'find'
-          get 'find_all'
+          get 'find', to: "items_finder#find"
+          get 'find_all', to: "items_finder#find_all"
           get 'random'
           get 'most_items'
         end
