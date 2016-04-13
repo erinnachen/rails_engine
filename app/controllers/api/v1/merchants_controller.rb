@@ -47,7 +47,7 @@ class Api::V1::MerchantsController < Api::ApiController
   end
 
   def revenue
-    respond_with Merchant.find(params[:id]).revenue, serializer: RevenueSerializer
+    respond_with Merchant.find(params[:id]).revenue(params[:date]), serializer: RevenueSerializer
   end
 
   private

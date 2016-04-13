@@ -18,7 +18,11 @@ class Merchant < ActiveRecord::Base
     customers.max_by { |customer| customer.success_transactions_count(id) }
   end
 
-  def revenue
-    invoices.reduce(0) { |acc, invoice| acc + invoice.revenue }
+  def revenue(date)
+    unless date
+      invoices.reduce(0) { |acc, invoice| acc + invoice.revenue }
+    else
+      invoices.where(created_at: date).reduce(0) { |acc, invoice| acc + invoice.revenue }
+    end
   end
 end
