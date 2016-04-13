@@ -4,7 +4,7 @@ Rails.application.routes.draw do
       resources :merchants, only: [:index, :show] do
         collection do
           get 'find', to: "merchants_finder#find"
-          get 'find_all', to: "merchants_finder#find_all" 
+          get 'find_all', to: "merchants_finder#find_all"
           get 'random'
           get 'most_revenue'
           get 'revenue', to: 'merchants#total_revenue'
@@ -34,8 +34,8 @@ Rails.application.routes.draw do
 
       resources :invoices, only: [:index, :show] do
         collection do
-          get 'find'
-          get 'find_all'
+          get 'find', to: "invoices_finder#find"
+          get 'find_all', to: "invoices_finder#find_all"
           get 'random'
         end
         member do

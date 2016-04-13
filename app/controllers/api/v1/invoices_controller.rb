@@ -1,29 +1,4 @@
 class Api::V1::InvoicesController < Api::ModelController
-  def index
-    respond_with Invoice.all
-  end
-
-  def show
-    respond_with Invoice.find(params[:id])
-  end
-
-  def find
-    unless params_lower?
-      respond_with Invoice.find_by(invoice_params)
-    else
-      key = params.keys.first
-      respond_with Invoice.where("lower(#{key}) = ?", params[key].downcase).first
-    end
-  end
-
-  def find_all
-    unless params_lower?
-      respond_with Invoice.where(invoice_params)
-    else
-      key = params.keys.first
-      respond_with Invoice.where("lower(#{key}) = ?", params[key].downcase)
-    end
-  end
 
   def random
     respond_with Invoice.take
@@ -50,11 +25,7 @@ class Api::V1::InvoicesController < Api::ModelController
   end
 
   private
-    def invoice_params
-      params.permit(:id, :merchant_id, :customer_id, :updated_at, :created_at)
-    end
-
-    def params_lower?
-      !!params[:status]
+    def model
+      Invoice
     end
 end
