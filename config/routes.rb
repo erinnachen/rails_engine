@@ -39,11 +39,11 @@ Rails.application.routes.draw do
           get 'random', to: "invoices_random#show"
         end
         member do
-          get 'transactions'
-          get 'invoice_items'
-          get 'items'
-          get 'customer'
-          get 'merchant'
+          get 'transactions', to: "invoices_transactions#index"
+          get 'invoice_items', to: "invoices_invoice_items#index"
+          get 'items', to: "invoices_items#index"
+          get 'customer', to: "invoices_customers#show"
+          get 'merchant', to: "invoices_merchants#show"
         end
       end
 
