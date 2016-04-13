@@ -46,6 +46,10 @@ class Api::V1::MerchantsController < Api::ApiController
     respond_with Merchant.find(params[:id]).favorite_customer
   end
 
+  def revenue
+    respond_with Merchant.find(params[:id]).revenue, serializer: RevenueSerializer
+  end
+
   private
     def merchant_params
       params.permit(:id, :created_at, :updated_at)
