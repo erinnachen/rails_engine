@@ -26,9 +26,9 @@ Rails.application.routes.draw do
           get 'random', to: "customers_random#show"
         end
         member do
-          get 'invoices'
-          get 'transactions'
-          get 'favorite_merchant'
+          get 'invoices', to: "customers_invoices#index"
+          get 'transactions', to: "customers_transactions#index"
+          get 'favorite_merchant', to: "customers_favorite_merchants#show"
         end
       end
 
