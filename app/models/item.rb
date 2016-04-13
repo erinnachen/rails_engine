@@ -13,6 +13,31 @@ class Item < ActiveRecord::Base
   end
 
   def self.most_items(quantity)
-    self.select("items.*, sum(invoice_items.quantity) as items_sold").joins(invoices: :transactions).where(transactions: {result: "success"}).group("items.id").order("items_sold DESC").take(quantity)
+    # self.select("items.*, sum(invoice_items.quantity) as items_sold").joins(invoices: :transactions).where(transactions: {result: "success"}).group("items.id").order("items_sold DESC").take(quantity)
+    all.sort_by {|item| -1*item.total_sold }.first(quantity)
+  end
+
+  def self.most_revenue(quantity)
+    all.sort_by {|item| -1*item.total_revenue }.first(quantity)
+  end
+
+  def total_revenue
+    invoice_items.reduce(0) do |sum, inv_item|
+      if inv_item.invoice.successful?
+        sum+inv_item.unit_price*inv_item.quantity
+      else
+        sum
+      end
+    end
+  end
+
+  def total_sold
+    invoice_items.reduce(0) do |sum, inv_item|
+      if inv_item.invoice.successful?
+        sum+inv_item.quantity
+      else
+        sum
+      end
+    end
   end
 end

@@ -64,6 +64,7 @@ Rails.application.routes.draw do
           get 'find_all', to: "items_finder#index"
           get 'random', to: "items_random#show"
           get 'most_items', to: "items_most_items#index"
+          get 'most_revenue', to: "items_most_revenues#show"
         end
         member do
           get 'invoice_items', to: "items_invoice_items#index"
