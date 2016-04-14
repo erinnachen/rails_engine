@@ -34,7 +34,7 @@ class Merchant < ActiveRecord::Base
   def self.most_revenue(quantity)
     #.order("revenue DESC").take(quantity)
     #self.select("merchants.*, sum('invoice_items.quantity*invoice_items.price') as revenue").joins(:transactions, :invoice_items).where(transactions: { result: "success" }).group("merchants.id").order("revenue DESC").take(quantity)
-    all.sort_by {|merchant| -1*merchant.revenue }.first(quantity)
+    #all.sort_by {|merchant| -1*merchant.revenue }.first(quantity)
   end
 
   def self.revenue(date)
@@ -43,7 +43,7 @@ class Merchant < ActiveRecord::Base
 
   def self.most_items(quantity)
     # Merchant.select("merchants.*, sum(invoice_items.quantity) as items_count").joins(:transactions, :invoice_items).where(transactions: { result: "success" }).group("merchants.id").order("items_count DESC").take(quantity)
-    all.sort_by {|merchant| -1*merchant.items_sold }.first(quantity)
+    #all.sort_by {|merchant| -1*merchant.items_sold }.first(quantity)
   end
 
   def items_sold
