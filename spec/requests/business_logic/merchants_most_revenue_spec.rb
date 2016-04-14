@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "GET /api/v1/merchants/most_revenue?quantity=" do
   include SpecHelpers
-  it "returns top merchants ranked by revenue" do
+  xit "returns top merchants ranked by revenue" do
     merchant1 = create(:merchant)
     merchant2 = create(:merchant)
     customer1 = create(:customer)

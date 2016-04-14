@@ -6,9 +6,7 @@ class Customer < ActiveRecord::Base
   validates :first_name, presence: true
   validates :last_name, presence: true
 
-  scope :has_pending_invoices, -> { joins(:invoices, :transactions).where(transactions: { result: "failed" })}
-
-  scope :paid_invoices, -> { joins(:invoices, :transactions).where(transactions: { result: "success" })}
+  scope :paid_invoices, -> { joins(:transactions).where(transactions: { result: "success" })}
 
   def favorite_merchant
    merchants.select("merchants.*,

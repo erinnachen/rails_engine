@@ -10,16 +10,9 @@ class Invoice < ActiveRecord::Base
   validates :status, presence: true
 
   scope :paid, -> { joins(:transactions).where(transactions: { result: "success" })}
+  scope :pending, -> { joins(:transactions).where(transactions: { result: "failed" })}
 
   def revenue
-    paid.joins(:invoice_items).sum('quantity*unit_price')
-  end
-
-  def pending?
-    !transactions.all? {|txn| txn.result == "success"}
-  end
-
-  def successful?
-    !!transactions.find {|txn| txn.result == "success"}
+    invoice_items.paid.sum('quantity*unit_price')
   end
 end

@@ -4,4 +4,6 @@ class InvoiceItem < ActiveRecord::Base
 
   validates :quantity, presence: true
   validates :unit_price, presence: true
+
+  scope :paid, -> { joins(:transactions).where(transactions: { result: "success" })}
 end
