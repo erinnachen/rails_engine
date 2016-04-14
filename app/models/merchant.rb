@@ -7,29 +7,27 @@ class Merchant < ActiveRecord::Base
 
   validates :name, presence: true
 
+  scope :paid_invoices, -> { joins(:invoices, :transactions).where(transactions: { result: "success" })}
+
   def customers_with_pending_invoices
-    customers = []
-    invoices.each do |invoice|
-      customers << Customer.find(invoice.customer_id) if invoice.pending?
-    end
-    customers.uniq
-
-
+    customers.has_pending_invoices
   end
 
   def favorite_customer
     customers.select("customers.*,
                       count(invoices.customer_id) as transactions_count")
-             .joins(:invoices).joins(:transactions)
-             .where(transactions: {result: "success"})
-             .group("customers.id").order("transactions_count DESC").take
+             .paid_invoices
+             .group("customers.id")
+             .order("transactions_count DESC")
+             .first
   end
 
   def revenue(date = nil)
     unless date
-      invoices.joins(:transactions, :invoice_items).where(transactions: { result: "success" }).sum('invoice_items.quantity*invoice_items.unit_price')
+      invoices.paid.joins(:invoice_items).sum('quantity*unit_price')
     else
-      invoices.joins(:transactions, :invoice_items).where(created_at: date, transactions: { result: "success" }).sum('invoice_items.quantity*invoice_items.unit_price')
+      invoices.paid.where(created_at: date)
+              .joins(:invoice_items).sum('quantity*unit_price')
     end
   end
 
@@ -37,6 +35,14 @@ class Merchant < ActiveRecord::Base
     #.order("revenue DESC").take(quantity)
     #self.select("merchants.*, sum('invoice_items.quantity*invoice_items.price') as revenue").joins(:transactions, :invoice_items).where(transactions: { result: "success" }).group("merchants.id").order("revenue DESC").take(quantity)
     #all.sort_by {|merchant| -1*merchant.revenue }.first(quantity)
+    # self.select("merchants.*, sum('invoice_items.quantity*invoice_items.unit_price') as revenue")
+    #     .paid_invoices
+    #     .joins(:invoice_items)
+    #     .group("merchants.id")
+    #     .order("revenue DESC")
+    #     .first(quantity)
+
+    self.paid_invoices.joins(:invoice_items).group("merchants.id").sum('quantity*unit_price').first(quantity)
   end
 
   def self.revenue(date)

@@ -9,7 +9,9 @@ class Item < ActiveRecord::Base
   validates :merchant_id, presence: true
 
   def best_day
-    invoices.joins(:transactions).where(transactions: {result: "success"}).select("invoices.created_at, sum(invoice_items.quantity) as items_sold").group("invoices.created_at").order("items_sold DESC").take
+    #invoices.joins(:transactions).where(transactions: {result: "success"}).select("invoices.created_at, sum(invoice_items.quantity) as items_sold").group("invoices.created_at").order("items_sold DESC").take
+
+    invoices.paid.select("invoices.created_at, sum(invoice_items.quantity) as items_sold").group("invoices.created_at").order("items_sold DESC").first
   end
 
   def self.most_items(quantity)

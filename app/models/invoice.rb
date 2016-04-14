@@ -12,7 +12,7 @@ class Invoice < ActiveRecord::Base
   scope :paid, -> { joins(:transactions).where(transactions: { result: "success" })}
 
   def revenue
-    self.joins(:transactions, :invoice_items).where(id: id, transactions: { result: "success" }).sum('invoice_items.quantity*invoice_items.unit_price')
+    paid.joins(:invoice_items).sum('quantity*unit_price')
   end
 
   def pending?
