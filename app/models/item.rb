@@ -14,11 +14,11 @@ class Item < ActiveRecord::Base
 
   def self.most_items(quantity)
     # self.select("items.*, sum(invoice_items.quantity) as items_sold").joins(invoices: :transactions).where(transactions: {result: "success"}).group("items.id").order("items_sold DESC").take(quantity)
-    all.sort_by {|item| -1*item.total_sold }.first(quantity)
+    #all.sort_by {|item| -1*item.total_sold }.first(quantity)
   end
 
   def self.most_revenue(quantity)
-    all.sort_by {|item| -1*item.total_revenue }.first(quantity)
+    #all.sort_by {|item| -1*item.total_revenue }.first(quantity)
   end
 
   def total_revenue
