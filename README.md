@@ -35,37 +35,12 @@ For each of the six models listed above, the following endpoints are available:
 
 * `GET /api/v1/<pluralized_model>/random.json` returns a random object of the requested model.
 
-#### Single Finders
+* `GET /api/v1/<pluralized_model>/random.json` returns a random object of the requested model.
 
-Each data category should offer `find` finders to return a single object representation like this:
+* `GET /api/v1/<pluralized_model>/find?id=<idnum>` returns an object of the requested model matching the query parameter (here id). All attributes of a model can be used as a query parameter.
 
-```
-GET /api/v1/merchants/find?id=12
-```
+* `GET /api/v1/<pluralized_model>/find_all?name=<name>` returns all maraches of the query parameter (here id). All attributes of a model can be used as a query parameter.
 
-Which would find the one merchant with ID `12`. The finder should work with any of the attributes defined on the data type and always be case insensitive.
-
-For example:
-
-```
-GET /api/v1/merchants/find?name=Schroeder-Jerde
-```
-
-#### Multi-Finders
-
-Each category should offer `find_all` finders like this:
-
-```
-GET /api/v1/merchants/find_all?name=Cummings-Thiel
-```
-
-Which would find all the merchants whose name matches this query.
-
-The finder should work with any of the attributes defined on the data type and always be case insensitive.
-
-#### Random
-
-`api/v1/merchants/random.json` returns a random merchant.
 ### Relationships
 #### Merchants
 
