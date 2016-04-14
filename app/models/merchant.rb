@@ -13,6 +13,8 @@ class Merchant < ActiveRecord::Base
       customers << Customer.find(invoice.customer_id) if invoice.pending?
     end
     customers.uniq
+
+
   end
 
   def favorite_customer
@@ -38,7 +40,9 @@ class Merchant < ActiveRecord::Base
   end
 
   def self.revenue(date)
-    Invoice.where(created_at: date).joins(:transactions, :invoice_items).where(transactions: { result: "success" }).sum('invoice_items.quantity*invoice_items.unit_price')
+    Invoice.paid.where(created_at: date)
+           .joins(:invoice_items)
+           .sum('quantity*unit_price')
   end
 
   def self.most_items(quantity)

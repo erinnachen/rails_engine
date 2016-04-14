@@ -7,11 +7,12 @@ This repository can be cloned down and ran with:
 git clone https://github.com/erinnachen/rails_engine.git
 cd rails_engine
 bundle
-rake db:{drop, setup}
+rake db:{drop,setup}
 rake import_csv:all
 ```
 
 To run the server: run `rails s`
+The test suite can be run with 'rspec'
 
 ## Database
 The relational database has six tables:

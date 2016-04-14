@@ -9,6 +9,8 @@ class Invoice < ActiveRecord::Base
   validates :customer_id, presence: true
   validates :status, presence: true
 
+  scope :paid, -> { joins(:transactions).where(transactions: { result: "success" })}
+
   def revenue
     self.joins(:transactions, :invoice_items).where(id: id, transactions: { result: "success" }).sum('invoice_items.quantity*invoice_items.unit_price')
   end
