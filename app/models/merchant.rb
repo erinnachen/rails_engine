@@ -7,7 +7,7 @@ class Merchant < ActiveRecord::Base
 
   validates :name, presence: true
 
-  scope :paid_invoices, -> { joins(:invoices, :transactions).where(transactions: { result: "success" })}
+  scope :paid_invoices, -> { joins(invoices: [:transactions]).where(transactions: { result: "success" })}
 
   def customers_with_pending_invoices
     customer_ids = invoices.pending.pluck(:customer_id)
@@ -33,6 +33,12 @@ class Merchant < ActiveRecord::Base
   end
 
   def self.most_revenue(quantity)
+    select("merchants.*, sum(quantity*unit_price) as revenue")
+          .joins(invoices: [:transactions, :invoice_items])
+          .where(transactions: {result: "success"})
+          .group("merchants.id")
+          .order("revenue DESC")
+          .first(quantity)
   end
 
   def self.revenue(date)
@@ -42,11 +48,11 @@ class Merchant < ActiveRecord::Base
   end
 
   def self.most_items(quantity)
-    # select("merchants.*, sum(quantity) as items_sold")
-    #     .paid_invoices
-    #     .joins(:invoice_items)
-    #     .group("merchants.id")
-    #     .order("items_sold DESC")
-    #     .first(quantity)
+    select("merchants.*, sum(quantity) as items_sold")
+          .joins(invoices: [:transactions, :invoice_items])
+          .where(transactions: { result: "success" })
+          .group("merchants.id")
+          .order("items_sold DESC")
+          .first(quantity)
   end
 end

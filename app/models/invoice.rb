@@ -11,8 +11,4 @@ class Invoice < ActiveRecord::Base
 
   scope :paid, -> { joins(:transactions).where(transactions: { result: "success" })}
   scope :pending, -> { joins(:transactions).where(transactions: { result: "failed" })}
-
-  def revenue
-    invoice_items.paid.sum('quantity*unit_price')
-  end
 end
