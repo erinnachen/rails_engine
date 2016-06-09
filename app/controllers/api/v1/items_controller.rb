@@ -5,5 +5,4 @@ class Api::V1::ItemsController < Api::ModelController
     def model
       Item
     end
-
 end

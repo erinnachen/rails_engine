@@ -63,8 +63,8 @@ Rails.application.routes.draw do
           get 'find', to: "items_finder#show"
           get 'find_all', to: "items_finder#index"
           get 'random', to: "items_random#show"
-          get 'most_items', to: "items_most_items#index"
-          get 'most_revenue', to: "items_most_revenues#show"
+          get 'most_items', to: "items#most_items"
+          get 'most_revenue', to: "items#most_revenues"
         end
         member do
           get 'invoice_items', to: "items_invoice_items#index"
@@ -80,8 +80,8 @@ Rails.application.routes.draw do
           get 'random', to: "invoice_items_random#show"
         end
         member do
-          get 'item', to: "invoice_items_items#show"
-          get 'invoice', to: "invoice_items_invoices#show"
+          get 'item', to: "invoice_items#item"
+          get 'invoice', to: "invoice_items#invoice"
         end
       end
 
