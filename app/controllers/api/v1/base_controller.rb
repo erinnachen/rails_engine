@@ -1,6 +1,19 @@
-class Api::FinderController < Api::BaseController
+class Api::V1::BaseController < ApplicationController
+  respond_to :json
+
+  def index
+    respond_with model.all
+  end
 
   def show
+    respond_with model.find(params[:id])
+  end
+
+  def random
+    respond_with model.order("RANDOM()").first
+  end
+
+  def find
     unless params_lower?
       respond_with model.find_by(permitted_params)
     else
@@ -8,7 +21,7 @@ class Api::FinderController < Api::BaseController
     end
   end
 
-  def index
+  def find_all
     unless params_lower?
       respond_with model.where(permitted_params)
     else

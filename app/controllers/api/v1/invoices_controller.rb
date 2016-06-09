@@ -1,4 +1,4 @@
-class Api::V1::InvoicesController < Api::ModelController
+class Api::V1::InvoicesController < Api::V1::BaseController
   def transactions
     respond_with Invoice.find(params[:id]).transactions
   end
@@ -23,5 +23,13 @@ class Api::V1::InvoicesController < Api::ModelController
 
     def model
       Invoice
+    end
+
+    def permitted_params
+      params.permit(:id, :merchant_id, :customer_id, :updated_at, :created_at)
+    end
+
+    def params_lower?
+      !!params[:status]
     end
 end

@@ -1,4 +1,4 @@
-class Api::V1::MerchantsController < Api::ModelController
+class Api::V1::MerchantsController < Api::V1::BaseController
   def most_revenue
     respond_with Merchant.most_revenue(params[:quantity].to_i)
   end
@@ -35,5 +35,13 @@ class Api::V1::MerchantsController < Api::ModelController
 
     def model
       Merchant
+    end
+
+    def permitted_params
+      params.permit(:id, :created_at, :updated_at)
+    end
+
+    def params_lower?
+      !!params[:name]
     end
 end

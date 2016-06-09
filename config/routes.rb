@@ -3,9 +3,9 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :merchants, only: [:index, :show] do
         collection do
-          get 'find', to: "merchants_finder#show"
-          get 'find_all', to: "merchants_finder#index"
-          get 'random', to: "merchants_random#show"
+          get 'find', to: "merchants#find"
+          get 'find_all', to: "merchants#find_all"
+          get 'random', to: "merchants#random"
           get 'most_revenue', to: "merchants#most_revenue"
           get 'revenue', to: 'merchants#total_revenue'
           get 'most_items', to: "merchants#most_items"
@@ -21,9 +21,9 @@ Rails.application.routes.draw do
 
       resources :customers, only: [:index, :show] do
         collection do
-          get 'find', to: "customers_finder#show"
-          get 'find_all', to: "customers_finder#index"
-          get 'random', to: "customers_random#show"
+          get 'find', to: "customers#find"
+          get 'find_all', to: "customers#find_all"
+          get 'random', to: "customers#random"
         end
         member do
           get 'invoices', to: "customers#invoices"
@@ -34,9 +34,9 @@ Rails.application.routes.draw do
 
       resources :invoices, only: [:index, :show] do
         collection do
-          get 'find', to: "invoices_finder#show"
-          get 'find_all', to: "invoices_finder#index"
-          get 'random', to: "invoices_random#show"
+          get 'find', to: "invoices#find"
+          get 'find_all', to: "invoices#find_all"
+          get 'random', to: "invoices#random"
         end
         member do
           get 'transactions', to: "invoices#transactions"
@@ -49,9 +49,9 @@ Rails.application.routes.draw do
 
       resources :transactions, only: [:index, :show] do
         collection do
-          get 'find', to: "transactions_finder#show"
-          get 'find_all', to: "transactions_finder#index"
-          get 'random', to: "transactions_random#show"
+          get 'find', to: "transactions#find"
+          get 'find_all', to: "transactions#find_all"
+          get 'random', to: "transactions#random"
         end
         member do
           get 'invoice', to: "transactions#invoice"
@@ -60,9 +60,9 @@ Rails.application.routes.draw do
 
       resources :items, only: [:index, :show] do
         collection do
-          get 'find', to: "items_finder#show"
-          get 'find_all', to: "items_finder#index"
-          get 'random', to: "items_random#show"
+          get 'find', to: "items#find"
+          get 'find_all', to: "items#find_all"
+          get 'random', to: "items#random"
           get 'most_items', to: "items#most_items"
           get 'most_revenue', to: "items#most_revenue"
         end
@@ -75,9 +75,9 @@ Rails.application.routes.draw do
 
       resources :invoice_items, only: [:index, :show] do
         collection do
-          get 'find', to: "invoice_items_finder#show"
-          get 'find_all', to: "invoice_items_finder#index"
-          get 'random', to: "invoice_items_random#show"
+          get 'find', to: "invoice_items#find"
+          get 'find_all', to: "invoice_items#find_all"
+          get 'random', to: "invoice_items#random"
         end
         member do
           get 'item', to: "invoice_items#item"

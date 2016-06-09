@@ -1,4 +1,4 @@
-class Api::V1::ItemsController < Api::ModelController
+class Api::V1::ItemsController < Api::V1::BaseController
   def most_items
     respond_with Item.most_items(params[:quantity].to_i)
   end
@@ -23,5 +23,14 @@ class Api::V1::ItemsController < Api::ModelController
 
     def model
       Item
+    end
+
+    def permitted_params
+      format_unit_price if params[:unit_price]
+      params.permit(:id, :unit_price, :merchant_id, :created_at, :updated_at)
+    end
+
+    def params_lower?
+      !!params[:name] || !!params[:description]
     end
 end
