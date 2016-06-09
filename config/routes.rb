@@ -26,9 +26,9 @@ Rails.application.routes.draw do
           get 'random', to: "customers_random#show"
         end
         member do
-          get 'invoices', to: "customers_invoices#index"
-          get 'transactions', to: "customers_transactions#index"
-          get 'favorite_merchant', to: "customers_favorite_merchants#show"
+          get 'invoices', to: "customers#invoices"
+          get 'transactions', to: "customers#transactions"
+          get 'favorite_merchant', to: "customers#favorite_merchant"
         end
       end
 
@@ -39,11 +39,11 @@ Rails.application.routes.draw do
           get 'random', to: "invoices_random#show"
         end
         member do
-          get 'transactions', to: "invoices_transactions#index"
-          get 'invoice_items', to: "invoices_invoice_items#index"
-          get 'items', to: "invoices_items#index"
-          get 'customer', to: "invoices_customers#show"
-          get 'merchant', to: "invoices_merchants#show"
+          get 'transactions', to: "invoices#transactions"
+          get 'invoice_items', to: "invoices#invoice_items"
+          get 'items', to: "invoices#items"
+          get 'customer', to: "invoices#customer"
+          get 'merchant', to: "invoices#merchant"
         end
       end
 
@@ -54,7 +54,7 @@ Rails.application.routes.draw do
           get 'random', to: "transactions_random#show"
         end
         member do
-          get 'invoice', to: "transactions_invoices#show"
+          get 'invoice', to: "transactions#invoice"
         end
       end
 
@@ -64,12 +64,12 @@ Rails.application.routes.draw do
           get 'find_all', to: "items_finder#index"
           get 'random', to: "items_random#show"
           get 'most_items', to: "items#most_items"
-          get 'most_revenue', to: "items#most_revenues"
+          get 'most_revenue', to: "items#most_revenue"
         end
         member do
-          get 'invoice_items', to: "items_invoice_items#index"
-          get 'merchant', to: "items_merchants#show"
-          get 'best_day', to: "items_best_days#show"
+          get 'invoice_items', to: "items#invoice_items"
+          get 'merchant', to: "items#merchant"
+          get 'best_day', to: "items#best_day"
         end
       end
 
